@@ -30,7 +30,7 @@ public class ConditionHelper {
     }
 
     public static boolean contains(String line, String s) {
-        return line.indexOf(s) >= 0;
+        return line.contains(s);
     }
 
     public static boolean enclosed(String line, String s) {

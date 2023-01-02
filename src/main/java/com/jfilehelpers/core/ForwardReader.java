@@ -26,7 +26,7 @@ import java.io.IOException;
 
 
 public class ForwardReader {
-    private BufferedReader reader;
+    private final BufferedReader reader;
     private int forwardIndex = 0;
     private int forwardLines = 0;
 
@@ -35,7 +35,7 @@ public class ForwardReader {
 
     private int remainingLines = 0;
     private int lineNumber = 0;
-    private String[] forwardStrings;
+    private final String[] forwardStrings;
 
     private boolean discardForward = false;
 
@@ -93,10 +93,10 @@ public class ForwardReader {
     }
 
     public String getRemainingText() {
-        StringBuffer sb = new StringBuffer(100);
+        StringBuilder sb = new StringBuilder(100);
 
         for (int i = 0; i < remainingLines + 1; i++) {
-            sb.append(forwardStrings[(forwardIndex + i) % (forwardLines + 1)] + StringHelper.NEW_LINE);
+            sb.append(forwardStrings[(forwardIndex + i) % (forwardLines + 1)]).append(StringHelper.NEW_LINE);
         }
 
         return sb.toString();
@@ -105,7 +105,7 @@ public class ForwardReader {
     public void close() {
         try {
             reader.close();
-        } catch (IOException e) {
+        } catch (IOException ignored) {
         }
     }
 

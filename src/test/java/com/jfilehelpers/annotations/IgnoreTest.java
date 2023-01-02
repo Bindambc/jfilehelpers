@@ -24,6 +24,7 @@ import com.jfilehelpers.converters.testobjects.SampleCustomer;
 import com.jfilehelpers.converters.testobjects.SampleCustomer2;
 import com.jfilehelpers.converters.testobjects.SampleCustomer3;
 import com.jfilehelpers.engines.FileHelperEngine;
+import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -33,12 +34,13 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 
 public class IgnoreTest  {
+    @Test
     public void testIgnoreBoth() throws IOException {
         FileHelperEngine<SampleCustomer> engine = new FileHelperEngine<SampleCustomer>(SampleCustomer.class);
 
         @SuppressWarnings("unchecked")
         List<SampleCustomer> res =
-                (ArrayList<SampleCustomer>) Common.readTest(engine, "Data/customers.txt");
+                (ArrayList<SampleCustomer>) Common.readTest(engine, "/Data/customers.txt");
 
         assertEquals(2, res.size());
 
@@ -49,12 +51,13 @@ public class IgnoreTest  {
         assertEquals("8", res.get(1).age);
     }
 
+    @Test
     public void testIgnoreLast() throws IOException {
         FileHelperEngine<SampleCustomer2> engine = new FileHelperEngine<SampleCustomer2>(SampleCustomer2.class);
 
         @SuppressWarnings("unchecked")
         List<SampleCustomer2> res =
-                (ArrayList<SampleCustomer2>) Common.readTest(engine, "Data/customers2.txt");
+                (ArrayList<SampleCustomer2>) Common.readTest(engine, "/Data/customers2.txt");
 
         assertEquals(2, res.size());
 
@@ -65,13 +68,13 @@ public class IgnoreTest  {
         assertEquals("8", res.get(1).age);
     }
 
-
+@Test
     public void testIgnoreFirst() throws IOException {
         FileHelperEngine<SampleCustomer3> engine = new FileHelperEngine<SampleCustomer3>(SampleCustomer3.class);
 
         @SuppressWarnings("unchecked")
         List<SampleCustomer3> res =
-                (ArrayList<SampleCustomer3>) Common.readTest(engine, "Data/customers3.txt");
+                (ArrayList<SampleCustomer3>) Common.readTest(engine, "/Data/customers3.txt");
 
         assertEquals(2, res.size());
 
@@ -81,13 +84,13 @@ public class IgnoreTest  {
         assertEquals("Ana Maria", res.get(1).name);
         assertEquals("8", res.get(1).age);
     }
-
+@Test
     public void testIgnoreCommentedLines() throws IOException {
         FileHelperEngine<SampleCustomer> engine = new FileHelperEngine<SampleCustomer>(SampleCustomer.class);
 
         @SuppressWarnings("unchecked")
         List<SampleCustomer> res =
-                (ArrayList<SampleCustomer>) Common.readTest(engine, "Data/customers-comments.txt");
+                (ArrayList<SampleCustomer>) Common.readTest(engine, "/Data/customers-comments.txt");
 
         assertEquals(3, res.size());
 

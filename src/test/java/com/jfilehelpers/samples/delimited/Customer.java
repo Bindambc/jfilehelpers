@@ -40,12 +40,11 @@ public class Customer {
     @Override
     public String toString() {
         String l = System.getProperty("line.separator");
-        StringBuffer b = new StringBuffer();
-        b.append("Customer: ").append(l);
-        b.append("   custId = " + custId).append(l);
-        b.append("   name = " + name).append(l);
-        b.append("   rating = " + rating).append(l);
-        b.append("   addedDate = " + addedDate).append(l);
-        return StringHelper.toStringBuilder(this, b.toString());
+        String b = "Customer: " + l +
+                "   custId = " + custId + l +
+                "   name = " + name + l +
+                "   rating = " + rating + l +
+                "   addedDate = " + addedDate + l;
+        return StringHelper.toStringBuilder(this, b);
     }
 }

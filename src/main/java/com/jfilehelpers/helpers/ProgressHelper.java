@@ -38,9 +38,6 @@ public class ProgressHelper {
 
         switch (mode) {
             case NotifyBytes:
-                handler.handleProgressChange(new ProgressEventArgs(mode, current, total));
-                break;
-
             case NotifyRecords:
                 handler.handleProgressChange(new ProgressEventArgs(mode, current, total));
                 break;

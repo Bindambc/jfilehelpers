@@ -69,7 +69,7 @@ public class DateFormatTest  {
     public void testDifferentEnglishFormat() throws IOException {
         FileHelperEngine<DateFormatType2> engine = new FileHelperEngine<DateFormatType2>(DateFormatType2.class);
 
-        List<DateFormatType2> res = (List<DateFormatType2>) Common.readTest(engine, "Good/DateFormat2.txt");
+        List<DateFormatType2> res = (List<DateFormatType2>) Common.readTest(engine, "/Good/DateFormat2.txt");
         assertEquals(6, res.size());
 
         Common.assertSameDate(getDate(1996, 7, 4), res.get(0).orderDate);

@@ -96,7 +96,7 @@ public class StringHelper {
         while (line.getLineStr() != null) {
             while (i < line.getLine().length) {
                 if (line.getLine()[i] == quoteChar) {
-                    if (firstFound == true) {
+                    if (firstFound) {
                         // Is an escaped quoted char
                         res.append(quoteChar);
                         firstFound = false;
@@ -122,9 +122,9 @@ public class StringHelper {
                 line.setCurrentPos(i);
                 return new ExtractedInfo(res.toString());
             } else {
-                if (allowMultiline == false) {
+                if (!allowMultiline) {
                     throw new IllegalArgumentException(
-                            "The current field has an UnClosed quoted string. Complete line: " + res.toString());
+                            "The current field has an UnClosed quoted string. Complete line: " + res);
                 }
 
                 line.readNextLine();
@@ -135,7 +135,7 @@ public class StringHelper {
         }
 
         throw new IllegalArgumentException(
-                "The current field has an unclosed quoted string. Complete Filed String: " + res.toString());
+                "The current field has an unclosed quoted string. Complete Filed String: " + res);
     }
 
     public static String trimBoth(String s, char[] toTrim) {
@@ -145,16 +145,16 @@ public class StringHelper {
     public static String trimStart(String s, char[] toTrim) {
         char[] sChars = s.toCharArray();
         String toTrimStr = new String(toTrim);
-        StringBuffer sb = new StringBuffer();
+        StringBuilder sb = new StringBuilder();
 
         boolean trimming = true;
-        for (int i = 0; i < sChars.length; i++) {
-            if (toTrimStr.indexOf(sChars[i]) == -1) {
+        for (char sChar : sChars) {
+            if (toTrimStr.indexOf(sChar) == -1) {
                 trimming = false;
             }
 
             if (!trimming) {
-                sb.append(sChars[i]);
+                sb.append(sChar);
             }
         }
 
@@ -164,7 +164,7 @@ public class StringHelper {
     public static String trimEnd(String s, char[] toTrim) {
         char[] sChars = s.toCharArray();
         String toTrimStr = new String(toTrim);
-        StringBuffer sb = new StringBuffer(s);
+        StringBuilder sb = new StringBuilder(s);
 
         for (int i = sChars.length - 1; i >= 0; i--) {
             if (toTrimStr.indexOf(sChars[i]) > -1) {

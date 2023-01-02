@@ -83,7 +83,7 @@ public final class RecordInfo<T> {
     }
 
     static Object getInternalField(final String fieldName, final Object target) {
-        Object value = AccessController
+        return AccessController
                 .doPrivileged(new PrivilegedAction<Object>() {
                     public Object run() {
                         Object result = null;
@@ -99,7 +99,6 @@ public final class RecordInfo<T> {
                         return result;
                     }
                 });
-        return value;
     }
 
     static void setInternalField(final String fieldName, final Object target, final Object value) {
