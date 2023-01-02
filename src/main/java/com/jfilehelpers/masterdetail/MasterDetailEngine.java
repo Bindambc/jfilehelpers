@@ -37,6 +37,7 @@ import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 
 /**
@@ -78,14 +79,8 @@ public class MasterDetailEngine<MT, DT> extends EngineBase<DT> {
     public List<MasterDetails<MT, DT>> readResource(String fileName) throws IOException {
         List<MasterDetails<MT, DT>> tempRes = null;
 
-        InputStreamReader fr = null;
-        try {
-            fr = new InputStreamReader(getClass().getResourceAsStream(fileName));
+        try (InputStreamReader fr = new InputStreamReader(Objects.requireNonNull(getClass().getResourceAsStream(fileName)))) {
             tempRes = readStream(fr);
-        } finally {
-            if (fr != null) {
-                fr.close();
-            }
         }
 
         return tempRes;
