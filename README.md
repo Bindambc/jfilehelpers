@@ -1,11 +1,15 @@
 What is JFileHelpers?
 ---------------------
 
-Chances are every programmer will end up having to manipulate structured text files at any point in his career. Those files are called flat files and, until now, you had to go through that same boring script to work with them. You had to open the file, create a reader, then start reading and parsing line by line. No more.
+Chances are every programmer will end up having to manipulate structured text files at any point in his career. Those
+files are called flat files and, until now, you had to go through that same boring script to work with them. You had to
+open the file, create a reader, then start reading and parsing line by line. No more.
 
-JFileHelpers is a library that automates the tedious task of parsing and creating structured text files. It handles fixed width or delimited files with Java annotations sweetness.
+JFileHelpers is a library that automates the tedious task of parsing and creating structured text files. It handles
+fixed width or delimited files with Java annotations sweetness.
 
-JFileHelpers started as a port of the awesome Marcos Meli's FileHelpers but it's starting to take its own path and we are in need of passinate developers who would like to give us a hand.
+JFileHelpers started as a port of the awesome Marcos Meli's FileHelpers but it's starting to take its own path and we
+are in need of passinate developers who would like to give us a hand.
 
 Go ahead and try it out!
 
@@ -13,27 +17,29 @@ The latest binary release can always be found on the [Releases](https://github.c
 
 ## So what's code like? ##
 
-Let's take, for instance, a fixed length structured text file, that handles customer data (you can see the ever-growing list of examples as well).
+Let's take, for instance, a fixed length structured text file, that handles customer data (you can see the ever-growing
+list of examples as well).
 
 Here's how our bean should be:
 
 ```java
+
 @FixedLengthRecord()
 public class Customer {
     @FieldFixedLength(4)
     public Integer custId;
 
-    @FieldAlign(alignMode=AlignMode.Right)
+    @FieldAlign(alignMode = AlignMode.Right)
     @FieldFixedLength(20)
     public String name;
 
     @FieldFixedLength(3)
     public Integer rating;
 
-    @FieldTrim(trimMode=TrimMode.Right)
+    @FieldTrim(trimMode = TrimMode.Right)
     @FieldFixedLength(10)
     @FieldConverter(converter = ConverterKind.Date,
-        format = "dd-MM-yyyy")
+            format = "dd-MM-yyyy")
     public Date addedDate;
 
     @FieldFixedLength(3)
@@ -54,36 +60,37 @@ This could would handle a text file structured like this:
 And reading that file is as easy as:
 
 ```java
-  FileHelperEngine<Customer> engine =
-      new FileHelperEngine<Customer>(Customer.class);
-  List<Customer> customers =
-      new ArrayList<Customer>();
+  FileHelperEngine<Customer> engine=
+        new FileHelperEngine<Customer>(Customer.class);
+        List<Customer> customers=
+        new ArrayList<Customer>();
 
-  customers = engine.readResource(
-      "/samples/customers-fixed.txt");
+        customers=engine.readResource(
+        "/samples/customers-fixed.txt");
 ```
 
-This way, you can manipulate any properties of the beans contained on the ArrayList collection and eventually, even recreate a file with same format, also as easy as:
+This way, you can manipulate any properties of the beans contained on the ArrayList collection and eventually, even
+recreate a file with same format, also as easy as:
 
 ```java
-FileHelperEngine<Customer> engine =
-    new FileHelperEngine<Customer>(Customer.class);
-List<Customer> customers = new ArrayList<Customer>();
+FileHelperEngine<Customer> engine=
+        new FileHelperEngine<Customer>(Customer.class);
+        List<Customer> customers=new ArrayList<Customer>();
 
-customers = engine.readResource(
-    "/samples/customers-fixed.txt");
+        customers=engine.readResource(
+        "/samples/customers-fixed.txt");
 
 // retrieves customer 3 - Anderson Polga
-Customer c = customers.get(2);
+        Customer c=customers.get(2);
 // changes a couple of properties
-c.rating = 82;
-c.stockSimbol = "APR";
+        c.rating=82;
+        c.stockSimbol="APR";
 
 // and removes first customer - Antonio Pereira
-customers.remove(0);
+        customers.remove(0);
 
 // writes the output file
-engine.writeFile("customers-fixed-out.txt", customers);
+        engine.writeFile("customers-fixed-out.txt",customers);
 ```
 
 As you may have already anticipated, the output file will look like this:
@@ -119,6 +126,7 @@ Three
 And a very simple bean like this:
 
 ```java
+
 @DelimitedRecord(",")
 public class EnumType2 {
     public Enum2 enumValue;
@@ -128,25 +136,25 @@ public class EnumType2 {
 It would be natural to write code for loading the file:
 
 ```java
-public static void main(String[] args) throws IOException {
-    FileHelperEngine engine =
+public static void main(String[]args)throws IOException{
+        FileHelperEngine engine=
         new FileHelperEngine<EnumType2>(EnumType2.class);
 
-    List<EnumType2> res =
+        List<EnumType2> res=
         engine.readResource(
-            "/test/Good/EnumConverter2.txt");
+        "/test/Good/EnumConverter2.txt");
 
-    System.out.println("Size: " + res.size());
+        System.out.println("Size: "+res.size());
 
-    System.out.println(
+        System.out.println(
         Enum2.One.equals(res.get(0).enumValue));
-    System.out.println(
+        System.out.println(
         Enum2.Two.equals(res.get(2).enumValue));
-    System.out.println(
+        System.out.println(
         Enum2.Three.equals(res.get(3).enumValue));
-    System.out.println(
+        System.out.println(
         Enum2.Three.equals(res.get(4).enumValue));
-}
+        }
 ```
 
 ... and that would print out:
@@ -179,38 +187,40 @@ ANTON|Antonio Moreno Taquería|Antonio Moreno|Owner|Mataderos  2312|México D.F.
 DUMON|Du monde entier|Janine Labrune|Owner|67, rue des Cinquante Otages|Nantes|France
 ```
 
-To indicate what records are to be considered as master as what are to be considered as detail, we use the following code:
+To indicate what records are to be considered as master as what are to be considered as detail, we use the following
+code:
 
 ```java
-engine = new MasterDetailEngine<CustomersVerticalBar,
-    OrdersVerticalBar>(CustomersVerticalBar.class, OrdersVerticalBar.class,
+engine=new MasterDetailEngine<CustomersVerticalBar,
+        OrdersVerticalBar>(CustomersVerticalBar.class,OrdersVerticalBar.class,
 
-        new MasterDetailSelector() {
+        new MasterDetailSelector(){
 
-            @Override
-            public RecordAction getRecordAction(String recordString) {
-                // if the first char on the record is a letter
-                // we'll consider it a master record and
-                // if not, we'll consider it a detail record
-                if (Character.isLetter(recordString.charAt(0)))
-                    return RecordAction.Master;
-                else
-                    return RecordAction.Detail;
-            }
+@Override
+public RecordAction getRecordAction(String recordString){
+        // if the first char on the record is a letter
+        // we'll consider it a master record and
+        // if not, we'll consider it a detail record
+        if(Character.isLetter(recordString.charAt(0)))
+        return RecordAction.Master;
+        else
+        return RecordAction.Detail;
+        }
 
         });
 
-List<MasterDetails<CustomersVerticalBar, OrdersVerticalBar>> res =
-    (List<MasterDetails<CustomersVerticalBar, OrdersVerticalBar>>)
-        Common.readTest(engine, "Good/MasterDetail1.txt");
+        List<MasterDetails<CustomersVerticalBar, OrdersVerticalBar>>res=
+        (List<MasterDetails<CustomersVerticalBar, OrdersVerticalBar>>)
+        Common.readTest(engine,"Good/MasterDetail1.txt");
 ```
 
 And here's how the beans are:
 
 ```java
+
 @DelimitedRecord("|")
 public class CustomersVerticalBar
-    implements ComparableRecord<CustomersVerticalBar> {
+        implements ComparableRecord<CustomersVerticalBar> {
 
     public String customerID;
     public String companyName;

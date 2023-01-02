@@ -4,5 +4,5 @@ import org.coury.jfilehelpers.annotations.DelimitedRecord;
 
 @DelimitedRecord(",")
 public class EnumType2 {
-	public Enum2 enumValue;
+    public Enum2 enumValue;
 }
