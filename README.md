@@ -17,6 +17,30 @@ Go ahead and try it out!
 
 The latest binary release can always be found on the [Releases](https://github.com/fcoury/jfilehelpers/releases) area.
 
+## How to use ##
+
+**1. Add the JitPack repository to your build file:**
+
+```xml
+	<repositories>
+		<repository>
+		    <id>jitpack.io</id>
+		    <url>https://jitpack.io</url>
+		</repository>
+	</repositories>
+```
+
+**2. Add the following Maven dependency to your project's `pom.xml`:**
+
+```xml
+   <dependency>
+      <groupId>com.github.Bindambc</groupId>
+      <artifactId>jfilehelpers</artifactId>
+      <version>0.01</version>
+   </dependency>
+```
+
+
 ## So what's code like? ##
 
 Let's take, for instance, a fixed length structured text file, that handles customer data (you can see the ever-growing
