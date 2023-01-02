@@ -1,5 +1,6 @@
 What is JFileHelpers?
 ---------------------
+[![Java CI with Maven](https://github.com/Bindambc/jfilehelpers/actions/workflows/maven-ci.yml/badge.svg)](https://github.com/Bindambc/jfilehelpers/actions/workflows/maven-ci.yml)
 
 Chances are every programmer will end up having to manipulate structured text files at any point in his career. Those
 files are called flat files and, until now, you had to go through that same boring script to work with them. You had to
