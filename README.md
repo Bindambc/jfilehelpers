@@ -36,7 +36,7 @@ The latest binary release can always be found on the [Releases](https://github.c
    <dependency>
       <groupId>com.github.Bindambc</groupId>
       <artifactId>jfilehelpers</artifactId>
-      <version>0.01</version>
+      <version>0.0.1</version>
    </dependency>
 ```
 
