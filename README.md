@@ -15,7 +15,7 @@ are in need of passinate developers who would like to give us a hand.
 
 Go ahead and try it out!
 
-The latest binary release can always be found on the [Releases](https://github.com/fcoury/jfilehelpers/releases) area.
+The latest binary release can always be found on the [releases](https://github.com/Bindambc/jfilehelpers/releases) area.
 
 ## How to use ##
 
