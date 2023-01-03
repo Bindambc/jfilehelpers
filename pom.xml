@@ -2,9 +2,9 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>com.jfilehelpers</groupId>
+    <groupId>com.jfilehelpers.api</groupId>
     <artifactId>jfilehelpers</artifactId>
-    <version>0.0.2</version>
+    <version>0.0.4</version>
     <packaging>jar</packaging>
 
     <name>jfilehelpers</name>
