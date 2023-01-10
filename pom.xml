@@ -13,7 +13,7 @@
     <properties>
         <maven.compiler.release>11</maven.compiler.release>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <org.junit.jupiter.version>5.9.1</org.junit.jupiter.version>
+        <org.junit.jupiter.version>5.9.2</org.junit.jupiter.version>
     </properties>
 
     <dependencies>
